@@ -13,15 +13,18 @@ export default function Register() {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   }
   async function submitHandler() {
-    const response = await fetch("http://localhost:4000/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...userDetails,
-      }),
-    });
+    const response = await fetch(
+      "https://daily--todolist.herokuapp.com/api/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...userDetails,
+        }),
+      }
+    );
     const data = await response.json();
     if (data.status === "success") {
       history.push("/login");

@@ -7,15 +7,18 @@ export default function Login() {
     setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
   }
   async function submitHandler() {
-    const response = await fetch("http://localhost:4000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...loginDetails,
-      }),
-    });
+    const response = await fetch(
+      "https://daily--todolist.herokuapp.com/api/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...loginDetails,
+        }),
+      }
+    );
     const data = await response.json();
     if (data.user) {
       alert("Login Successfull");

@@ -9,11 +9,14 @@ export default function Todo() {
   const [todo, setTodo] = useState({ todo: "" });
 
   async function populateTodo() {
-    const request = await fetch("http://localhost:4000/api/todo/", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    });
+    const request = await fetch(
+      "https://daily--todolist.herokuapp.com/api/todo/",
+      {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }
+    );
     const data = await request.json();
     // console.log("data:", data);
     if (data.status === "success") {
@@ -42,7 +45,7 @@ export default function Todo() {
   }, []);
 
   async function addTodo() {
-    const res = await fetch("http://localhost:4000/api/todo/", {
+    const res = await fetch("https://daily--todolist.herokuapp.com/api/todo/", {
       method: "PATCH",
       headers: {
         "x-access-token": localStorage.getItem("token"),
@@ -62,16 +65,19 @@ export default function Todo() {
 
   async function deleteTodo(id) {
     const string = todoList[id];
-    const response = await fetch("http://localhost:4000/api/todo/", {
-      method: "DELETE",
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        string: string,
-      }),
-    });
+    const response = await fetch(
+      "https://daily--todolist.herokuapp.com/api/todo/",
+      {
+        method: "DELETE",
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          string: string,
+        }),
+      }
+    );
     const data = await response.json();
     if (data.status === "success") {
       populateTodo();
